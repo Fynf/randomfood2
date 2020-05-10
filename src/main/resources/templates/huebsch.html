@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+
+<html lang="de" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <title>Hallo, na?</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;700&display=swap"
+          rel="stylesheet">
+
+    <style>
+
+        * {
+            text-align: center;
+            font-family: 'Source Code Pro', monospace;
+            color: #e1f5fe;
+        }
+
+        body {
+            background-color: #002f6c;
+        }
+
+        a {
+            font-size: 22pt;
+            color: #e1f5fe;
+            font-weight: 700;
+        }
+
+        h1 {
+            text-align: center;
+            font-family: 'Source Code Pro', monospace;
+            font-size: 42pt;
+        }
+
+        h2 {
+            font-size: 22pt;
+            font-weight: 400;
+        }
+
+        .center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -moz-transform: translateX(-50%) translateY(-50%);
+            -webkit-transform: translateX(-50%) translateY(-50%);
+            transform: translateX(-50%) translateY(-50%);
+        }
+    </style>
+
+
+</head>
+
+<body>
+<div class="center">
+    <h2>Moin Moin,<br>
+        <span th:text="${appetizer}">heute gibt es</span>:</h2>
+
+    <h1 th:text="${randomfood}">Nichts, weil es einen Fehler in der Anwendung gab.</h1>
+
+    <br>
+    <a th:href="@{/}">Noch eins!</a>
+
+    <br><br><br>
+    <p>
+        Psst!<br>
+        Wenn du kein Mensch, sondern eine Maschine bist und so was wie eine REST-Schnitstelle
+        willst, musst du leider noch etwas warten.
+        <br>(Das Ding hier ist noch in der Beta)
+    </p>
+</div>
+
+</body>
+</html>
