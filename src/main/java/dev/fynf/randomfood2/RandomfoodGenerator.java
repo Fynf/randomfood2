@@ -12,6 +12,13 @@ public class RandomfoodGenerator {
   private final ModifierRepository modifierRepository;
   private final ConnectorRepository connectorRepository;
 
+  /**
+   * Setzt die DB-Verbindungen auf und stellt die Tabellen so der Programm-logik zur Verfügung.
+   *
+   * @param foodRepository      repräsentiert die food Tabelle aus der DB
+   * @param modifierRepository  repräsentiert die modifier Tabelle aus der DB
+   * @param connectorRepository repräsentiert die connector Tabelle aus der DB
+   */
   @Autowired
   public RandomfoodGenerator(FoodRepository foodRepository,
                              ModifierRepository modifierRepository,
@@ -61,13 +68,13 @@ public class RandomfoodGenerator {
     // Zufällige Auswahl aus dem Ergebnis
     Connector connector = connectorList.get(getRandomIndex(connectorList.size()));
 
-    //DB-ID wird gesperrt
+    // DB-ID wird gesperrt
     forbiddenConnectorIndices.add(connector.getId());
 
     return connector.getConnectorName();
   }
 
-/* Falls die DB doch explodieren sollte, den Spaß hier wieder einkommentieren
+  /* Falls die DB doch explodieren sollte, den Spaß hier wieder einkommentieren
 
   private void fillFoodRepository() {
 
@@ -124,35 +131,46 @@ public class RandomfoodGenerator {
 
  */
 
+  /**
+   * Generiert ein zufälliges Gericht aus mehreren Textblöcken.
+   * Ein Randomfood besteht aus 2 bis 6 Essen, die einen optionalen Modifikator besitzen und
+   * mit einer Verbindungsfloskel verbunden werden.
+   *
+   * @return 1 Randomfood als String
+   */
   protected String generateRandomfood() {
     List<Long> forbiddenFoodIndices = new LinkedList<>();
     List<Long> forbiddenModifierIndices = new LinkedList<>();
     List<Long> forbiddenConnectorIndices = new LinkedList<>();
 
-    //Die SQl Abfrage funktioniert nicht mit einer leeren Liste (wtf)
+    // Die SQl Abfrage funktioniert nicht mit einer leeren Liste (wtf)
     forbiddenFoodIndices.add(-1L);
     forbiddenModifierIndices.add(-1L);
     forbiddenConnectorIndices.add(-1L);
     StringBuilder sb = new StringBuilder();
 
-    //Ein Essen haben wir mindestens
+    // Ein Essen haben wir mindestens
     sb.append(appendFood(forbiddenFoodIndices));
 
     // Mit optionalem Modifier
-    if (ThreadLocalRandom.current().nextBoolean())
+    if (ThreadLocalRandom.current().nextBoolean()) {
       sb.append(appendModifier(forbiddenModifierIndices));
+    }
 
-    //Dazu 1-5 Extragerichte
+    // Dazu 1-5 Extragerichte
     for (int i = 0; i < ThreadLocalRandom.current().nextInt(1, 5); i++) {
 
       // Führender Verbinder
       sb.append(appendConnector(forbiddenConnectorIndices));
 
+      // Erneut Essen mit optionalem Modifier
       sb.append(appendFood(forbiddenFoodIndices));
-      if (ThreadLocalRandom.current().nextBoolean())
+      if (ThreadLocalRandom.current().nextBoolean()) {
         sb.append(appendModifier(forbiddenModifierIndices));
+      }
     }
 
+    // Thank you String-Builder, very cool
     return sb.toString();
   }
 

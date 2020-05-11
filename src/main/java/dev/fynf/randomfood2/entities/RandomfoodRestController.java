@@ -22,9 +22,18 @@ public class RandomfoodRestController extends RandomfoodGenerator {
     super(foodRepository, modifierRepository, connectorRepository);
   }
 
+  /**
+   * Generiert eine Liste von {count} randomfoods und gibt diese als HTML-Response zurück.
+   * Die Liste ist in ihrer Größe auf maximal 10 beschränkt, höhere Anfragen werden auf 10 limitiert
+   *
+   * @param count Die vom Nutzer in der URL angegebene, gewünschte Anzahl von Randomfoods.
+   * @return Eine Liste an {count} Randomfoods (max. 10)
+   */
   @GetMapping("{count}")
   public List<String> returnRandomFoods(@PathVariable int count) {
-    if (count > 10) count = 10;
+    if (count > 10) {
+      count = 10;
+    }
 
     return Stream.iterate(0, i -> i + 1)
         .limit(count)
