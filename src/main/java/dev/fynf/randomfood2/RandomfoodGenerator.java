@@ -1,89 +1,29 @@
 package dev.fynf.randomfood2;
 
 import dev.fynf.randomfood2.entities.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
-@Controller
-public class RandomfoodController {
+public class RandomfoodGenerator {
   private final FoodRepository foodRepository;
   private final ModifierRepository modifierRepository;
   private final ConnectorRepository connectorRepository;
 
   @Autowired
-  public RandomfoodController(FoodRepository foodRepository,
-                              ModifierRepository modifierRepository,
-                              ConnectorRepository connectorRepository) {
+  public RandomfoodGenerator(FoodRepository foodRepository,
+                             ModifierRepository modifierRepository,
+                             ConnectorRepository connectorRepository) {
+
     this.foodRepository = foodRepository;
-    fillFoodRepository();
-
     this.modifierRepository = modifierRepository;
-    fillFoodModifierList();
-
     this.connectorRepository = connectorRepository;
-    fillConnectors();
-
   }
 
   private static int getRandomIndex(int listLength) {
     return ThreadLocalRandom.current().nextInt(0, listLength);
-  }
-
-  @GetMapping("/")
-  public String returnRandomFood(Model m) {
-    String[] appetizers = new String[]
-        {"heute gibt es", "wir servieren heute", "die Empfehlung des Hauses ist", "koch' doch mal",
-            "probier' doch mal", "der Chefkoch empfiehlt heute", "in der Kantine gibt's",
-            "wie wär's mit"};
-
-    m.addAttribute("appetizer",
-        appetizers[ThreadLocalRandom.current().nextInt(0, appetizers.length - 1)]);
-    m.addAttribute("randomfood", generateRandomfood());
-
-    return "huebsch";
-  }
-
-  private String generateRandomfood() {
-    List<Long> forbiddenFoodIndices = new LinkedList<>();
-    List<Long> forbiddenModifierIndices = new LinkedList<>();
-    List<Long> forbiddenConnectorIndices = new LinkedList<>();
-
-    //Die SQl Abfrage funktioniert nicht mit einer leeren Liste (wtf)
-    forbiddenFoodIndices.add(-1L);
-    forbiddenModifierIndices.add(-1L);
-    forbiddenConnectorIndices.add(-1L);
-    StringBuilder sb = new StringBuilder();
-
-    //Ein Essen haben wir mindestens
-    sb.append(appendFood(forbiddenFoodIndices));
-
-    // Mit optionalem Modifier
-    if (ThreadLocalRandom.current().nextBoolean())
-      sb.append(appendModifier(forbiddenModifierIndices));
-
-    //Dazu 1-5 Extragerichte
-    for (int i = 0; i < ThreadLocalRandom.current().nextInt(1, 5); i++) {
-
-      // Führender Verbinder
-      sb.append(appendConnector(forbiddenConnectorIndices));
-
-      sb.append(appendFood(forbiddenFoodIndices));
-      if (ThreadLocalRandom.current().nextBoolean())
-        sb.append(appendModifier(forbiddenModifierIndices));
-    }
-
-    return sb.toString();
   }
 
   private String appendFood(List<Long> forbiddenFoodIndices) {
@@ -126,6 +66,8 @@ public class RandomfoodController {
 
     return connector.getConnectorName();
   }
+
+/* Falls die DB doch explodieren sollte, den Spaß hier wieder einkommentieren
 
   private void fillFoodRepository() {
 
@@ -178,6 +120,40 @@ public class RandomfoodController {
     connectors.stream()
         .map(Connector::new)
         .forEach(connectorRepository::save);
+  }
+
+ */
+
+  protected String generateRandomfood() {
+    List<Long> forbiddenFoodIndices = new LinkedList<>();
+    List<Long> forbiddenModifierIndices = new LinkedList<>();
+    List<Long> forbiddenConnectorIndices = new LinkedList<>();
+
+    //Die SQl Abfrage funktioniert nicht mit einer leeren Liste (wtf)
+    forbiddenFoodIndices.add(-1L);
+    forbiddenModifierIndices.add(-1L);
+    forbiddenConnectorIndices.add(-1L);
+    StringBuilder sb = new StringBuilder();
+
+    //Ein Essen haben wir mindestens
+    sb.append(appendFood(forbiddenFoodIndices));
+
+    // Mit optionalem Modifier
+    if (ThreadLocalRandom.current().nextBoolean())
+      sb.append(appendModifier(forbiddenModifierIndices));
+
+    //Dazu 1-5 Extragerichte
+    for (int i = 0; i < ThreadLocalRandom.current().nextInt(1, 5); i++) {
+
+      // Führender Verbinder
+      sb.append(appendConnector(forbiddenConnectorIndices));
+
+      sb.append(appendFood(forbiddenFoodIndices));
+      if (ThreadLocalRandom.current().nextBoolean())
+        sb.append(appendModifier(forbiddenModifierIndices));
+    }
+
+    return sb.toString();
   }
 
 }

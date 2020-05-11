@@ -19,7 +19,7 @@
             background-color: #002f6c;
         }
 
-        a {
+        a.anotherone {
             font-size: 22pt;
             color: #e1f5fe;
             font-weight: 700;
@@ -57,14 +57,16 @@
     <h1 th:text="${randomfood}">Nichts, weil es einen Fehler in der Anwendung gab.</h1>
 
     <br>
-    <a th:href="@{/}">Noch eins!</a>
+    <a class="anotherone" th:href="@{/}">Noch eins!</a>
 
     <br><br><br>
     <p>
         Psst!<br>
-        Wenn du kein Mensch, sondern eine Maschine bist und so was wie eine REST-Schnitstelle
-        willst, musst du leider noch etwas warten.
-        <br>(Das Ding hier ist noch in der Beta)
+        Wenn du kein Mensch, sondern eine Maschine bist, kannst du "/&lt;anzahl&gt;" an die URL anh&auml;ngen
+        und bekommst dann eine JSON-Liste von bis zu 10 Objekten.<br><br>
+        Also <a href="/1">https://randomfood.fynf.dev/1</a> zum Beispiel, nicht einfach nur /&lt;anzahl&gt;
+        schreiben und dann wundern, 'ne?
+
     </p>
 </div>
 
