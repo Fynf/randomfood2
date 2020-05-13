@@ -19,11 +19,11 @@ public class RandomfoodHumanController extends RandomfoodGenerator {
   }
 
   /**
-   * Generiert ein (1) Randomfood und reicht es an Thymeleaf weiter, um dem Nutzer die huebsch.html
+   * Generiert ein (1) Randomfood und reicht es an Thymeleaf weiter, um dem Nutzer die output.html
    * mit einem eingefügten Randomfood anzuzeigen.
    *
    * @param m ist das Model von Spring, um Thymeleaf den Zugriff auf die Attribute zu ermöglichen
-   * @return huebsch, um Thymeleaf zu signalisieren, dass dem Nutzer die huebsch.html sehen soll
+   * @return output, um Thymeleaf zu signalisieren, dass dem Nutzer die output.html sehen soll
    */
   @GetMapping("/")
   public String returnRandomFood(Model m) {
@@ -36,6 +36,6 @@ public class RandomfoodHumanController extends RandomfoodGenerator {
         appetizers[ThreadLocalRandom.current().nextInt(0, appetizers.length - 1)]);
     m.addAttribute("randomfood", generateRandomfood());
 
-    return "huebsch";
+    return "output";
   }
 }
