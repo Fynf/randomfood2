@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 
-<html lang="de" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="de" xmlns="http://www.w3.org/1999/xhtml">
 <head>
 
-    <title>Randomfood as a Service</title>
+    <title>Fehler 400 | Randomfood</title>
     <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;700&display=swap"
           rel="stylesheet">
 
@@ -19,7 +19,7 @@
             background-color: #002f6c;
         }
 
-        a.anotherone {
+        a.bigLink {
             font-size: 22pt;
             color: #e1f5fe;
             font-weight: 700;
@@ -34,6 +34,10 @@
         h2 {
             font-size: 22pt;
             font-weight: 400;
+        }
+
+        p {
+            text-align: left;
         }
 
         .center {
@@ -51,23 +55,20 @@
 
 <body>
 <div class="center">
-    <h2>Moin Moin,<br>
-        <span th:text="${appetizer}">heute gibt es</span>:</h2>
 
-    <h1 th:text="${randomfood}">Nichts, weil es einen Fehler in der Anwendung gab.</h1>
+    <h1>Des versteh' isch nedd. (400)</h1>
 
     <br>
-    <a class="anotherone" th:href="@{/}">Noch eins!</a>
+    <br>
+    <h2>Der Server kann mit der Anfrage nicht umgehen, weil er eine f&uuml;r ihn unverst&auml;ndliche
+        Anfrage erhalten hat.</h2><br>
 
-    <br><br><br>
-    <p>
-        Psst!<br>
-        Wenn du kein Mensch, sondern eine Maschine bist, kannst du "/&lt;anzahl&gt;" an die URL anh&auml;ngen
-        und bekommst dann eine JSON-Liste von bis zu 10 Objekten.<br><br>
-        Also <a href="/1">https://randomfood.fynf.dev/1</a> zum Beispiel, nicht einfach nur /&lt;anzahl&gt;
-        schreiben und dann wundern, 'ne?
+    <p>Falls du zum Beispiel &lt;/keine Zahl&gt; in die URL geschrieben hast, w&uuml;rde ich das in
+        Zukunft lassen (Au&szlig;er nat&uuml;rlich, du magst die Seite hier).</p>
 
-    </p>
+
+    <br>
+    <a class="bigLink" href="/">Zur&uuml;ck auf Los</a>
 </div>
 
 </body>
