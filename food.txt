@@ -346,3 +346,4 @@ Karneval
 Fastnacht
 Fasching
 Vorlesungsbetrieb
+Stierhoden

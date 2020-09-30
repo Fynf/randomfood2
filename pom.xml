@@ -7,12 +7,12 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.2.6.RELEASE</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <version>2.3.4.RELEASE</version>
+        <relativePath/>
     </parent>
 
     <groupId>dev.fynf</groupId>
-    <version>0.9.1-Beta</version>
+    <version>0.9.3-Beta</version>
 
     <artifactId>randomfood2</artifactId>
     <name>randomfood2</name>
@@ -37,13 +37,11 @@
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-jpa</artifactId>
-            <version>2.2.6.RELEASE</version>
         </dependency>
 
         <dependency>
             <groupId>org.thymeleaf</groupId>
             <artifactId>thymeleaf</artifactId>
-            <version>3.0.11.RELEASE</version>
         </dependency>
 
         <dependency>
@@ -54,7 +52,6 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
-            <version>2.2.6.RELEASE</version>
         </dependency>
 
         <dependency>
@@ -72,6 +69,13 @@
                     <artifactId>junit-vintage-engine</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+
+        <!-- H2 Database for Test-->
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>runtime</scope>
         </dependency>
 
     </dependencies>

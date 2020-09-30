@@ -33,3 +33,5 @@ schimmel
 pudding
  aus dem Römertopf im Backofen
  gegart
+-sauté
+ vom Grillspieß
