@@ -16,6 +16,7 @@
           onload="this.media='all'" rel="stylesheet"/>
 
     <link rel="stylesheet" th:href="@{/css/stylesheet.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/snackbar.css}" type="text/css"/>
 
     <title>Randomfood as a Service</title>
 
@@ -23,6 +24,8 @@
         /*<![CDATA[*/
 
         const copyToClipboard = () => {
+
+            // Zwischenablage
             const el = document.createElement('textarea');  // Create a <textarea> element
             el.value = [[${randomfood}]];                   // Set its value to the string that you want copied
             el.setAttribute('readonly', '');                // Make it readonly to be tamper-proof
@@ -31,15 +34,23 @@
             document.body.appendChild(el);                  // Append the <textarea> element to the HTML document
             const selected =
                 document.getSelection().rangeCount > 0      // Check if there is any content selected previously
-                    ? document.getSelection().getRangeAt(0)     // Store selection if found
-                    : false;                                    // Mark as false to know no selection existed before
+                    ? document.getSelection().getRangeAt(0) // Store selection if found
+                    : false;                                // Mark as false to know no selection existed before
             el.select();                                    // Select the <textarea> content
             document.execCommand('copy');                   // Copy - only works as a result of a user action (e.g. click events)
             document.body.removeChild(el);                  // Remove the <textarea> element
-            if (selected) {                                   // If a selection existed before copying
-                document.getSelection().removeAllRanges();    // Unselect everything on the HTML document
-                document.getSelection().addRange(selected);   // Restore the original selection
+            if (selected) {                                 // If a selection existed before copying
+                document.getSelection().removeAllRanges();  // Unselect everything on the HTML document
+                document.getSelection().addRange(selected); // Restore the original selection
             }
+
+            // Info-Snackbar
+            var x = document.getElementById("snackbar");    // Get the snackbar DIV
+            x.className = "show";                           // Add the "show" class to DIV
+                                                            // After 3 seconds, remove the show class from DIV
+            setTimeout(function () {
+                x.className = x.className.replace("show", "");
+            }, 3000);
         };
 
         /*]]>*/
@@ -54,8 +65,8 @@
     <h1 th:text="${randomfood}">Nichts, weil es einen Fehler in der Anwendung gab.</h1>
 
     <br>
-    <a class="biglink" th:href="@{/}">Noch eins!</a>
-    <a class="biglink" onclick="copyToClipboard()">In die Zwischenablage!</a>
+    <a class="biglink" th:href="@{/}">Noch eins!</a><br><br>
+    <a class="biglink" href="#" onclick="copyToClipboard()">In die Zwischenablage!</a>
 
     <br><br><br>
     <p>
@@ -70,5 +81,8 @@
 
 <div class="bottomleft"><a
         href="https://github.com/Fynf/randomfood2">[Der Code ist auf GitHub!]</a></div>
+
+<div id="snackbar">Kulinarische Kreation kopiert!</div>
+
 </body>
 </html>

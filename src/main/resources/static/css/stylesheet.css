@@ -40,7 +40,7 @@ a.biglink {
 }
 
 .bottomleft {
-    position: absolute;
+    position: fixed;
     bottom: 8px;
     left: 8px;
 }
