@@ -3,50 +3,58 @@
 <html lang="de" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
 
-    <title>Randomfood as a Service</title>
+    <link crossorigin
+          href="https://fonts.gstatic.com"
+          rel="preconnect"/>
+
+    <link as="style"
+          href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;700&display=swap"
+          rel="preload"/>
+
     <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;700&display=swap"
-          rel="stylesheet">
+          media="print"
+          onload="this.media='all'" rel="stylesheet"/>
 
-    <style>
+    <link rel="stylesheet" th:href="@{/css/stylesheet.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/snackbar.css}" type="text/css"/>
 
-        * {
-            text-align: center;
-            font-family: 'Source Code Pro', monospace;
-            color: #e1f5fe;
-        }
+    <title>Randomfood as a Service</title>
 
-        body {
-            background-color: #002f6c;
-        }
+    <script th:inline="javascript">
+        /*<![CDATA[*/
 
-        a.anotherone {
-            font-size: 22pt;
-            color: #e1f5fe;
-            font-weight: 700;
-        }
+        const copyToClipboard = () => {
 
-        h1 {
-            text-align: center;
-            font-family: 'Source Code Pro', monospace;
-            font-size: 42pt;
-        }
+            // Zwischenablage
+            const el = document.createElement('textarea');  // Create a <textarea> element
+            el.value = [[${randomfood}]];                   // Set its value to the string that you want copied
+            el.setAttribute('readonly', '');                // Make it readonly to be tamper-proof
+            el.style.position = 'absolute';
+            el.style.left = '-9999px';                      // Move outside the screen to make it invisible
+            document.body.appendChild(el);                  // Append the <textarea> element to the HTML document
+            const selected =
+                document.getSelection().rangeCount > 0      // Check if there is any content selected previously
+                    ? document.getSelection().getRangeAt(0) // Store selection if found
+                    : false;                                // Mark as false to know no selection existed before
+            el.select();                                    // Select the <textarea> content
+            document.execCommand('copy');                   // Copy - only works as a result of a user action (e.g. click events)
+            document.body.removeChild(el);                  // Remove the <textarea> element
+            if (selected) {                                 // If a selection existed before copying
+                document.getSelection().removeAllRanges();  // Unselect everything on the HTML document
+                document.getSelection().addRange(selected); // Restore the original selection
+            }
 
-        h2 {
-            font-size: 22pt;
-            font-weight: 400;
-        }
+            // Info-Snackbar
+            var x = document.getElementById("snackbar");    // Get the snackbar DIV
+            x.className = "show";                           // Add the "show" class to DIV
+                                                            // After 3 seconds, remove the show class from DIV
+            setTimeout(function () {
+                x.className = x.className.replace("show", "");
+            }, 3000);
+        };
 
-        .center {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            -moz-transform: translateX(-50%) translateY(-50%);
-            -webkit-transform: translateX(-50%) translateY(-50%);
-            transform: translateX(-50%) translateY(-50%);
-        }
-    </style>
-
-
+        /*]]>*/
+    </script>
 </head>
 
 <body>
@@ -57,18 +65,24 @@
     <h1 th:text="${randomfood}">Nichts, weil es einen Fehler in der Anwendung gab.</h1>
 
     <br>
-    <a class="anotherone" th:href="@{/}">Noch eins!</a>
+    <a class="biglink" th:href="@{/}">Noch eins!</a><br><br>
+    <a class="biglink" href="#" onclick="copyToClipboard()">In die Zwischenablage!</a>
 
     <br><br><br>
     <p>
         Psst!<br>
         Wenn du kein Mensch, sondern eine Maschine bist, kannst du "/&lt;anzahl&gt;" an die URL anh&auml;ngen
-        und bekommst dann eine JSON-Liste von bis zu 10 Objekten.<br><br>
+        und bekommst dann via REST-Api eine Liste von bis zu 10 Objekten.<br><br>
         Also <a href="/1">https://randomfood.fynf.dev/1</a> zum Beispiel, nicht einfach nur /&lt;anzahl&gt;
         schreiben und dann wundern, 'ne?
 
     </p>
 </div>
+
+<div class="bottomleft"><a
+        href="https://github.com/Fynf/randomfood2">[Der Code ist auf GitHub!]</a></div>
+
+<div id="snackbar">Kulinarische Kreation kopiert!</div>
 
 </body>
 </html>

@@ -1,62 +1,29 @@
 <!DOCTYPE html>
 
-<html lang="de" xmlns="http://www.w3.org/1999/xhtml">
+<html lang="de" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-
     <title>Fehler | Randomfood</title>
+
+    <link crossorigin
+          href="https://fonts.gstatic.com"
+          rel="preconnect"/>
+
+    <link as="style"
+          href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;700&display=swap"
+          rel="preload"/>
+
     <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;700&display=swap"
-          rel="stylesheet">
+          media="print"
+          onload="this.media='all'" rel="stylesheet"/>
 
-    <style>
-
-        * {
-            text-align: center;
-            font-family: 'Source Code Pro', monospace;
-            color: #e1f5fe;
-        }
-
-        body {
-            background-color: #002f6c;
-        }
-
-        a.bigLink {
-            font-size: 22pt;
-            color: #e1f5fe;
-            font-weight: 700;
-        }
-
-        h1 {
-            text-align: center;
-            font-family: 'Source Code Pro', monospace;
-            font-size: 42pt;
-        }
-
-        h2 {
-            font-size: 22pt;
-            font-weight: 400;
-        }
-
-        p {
-            text-align: left;
-        }
-
-        .center {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            -moz-transform: translateX(-50%) translateY(-50%);
-            -webkit-transform: translateX(-50%) translateY(-50%);
-            transform: translateX(-50%) translateY(-50%);
-        }
-    </style>
-
+    <link rel="stylesheet" th:href="@{/css/stylesheet.css}" type="text/css"/>
 
 </head>
 
 <body>
 <div class="center">
 
-    <h1>Ja... Nee,du.</h1>
+    <h1>Ja... Nee, du.</h1>
 
     <br>
     <br>
@@ -66,12 +33,15 @@
     <br>
     <p>Falls du den Fehlercode wissen magst, schau in die HTTP-Response, die findest du unter
         Strg+Umschalt+I und dann "Netzwerkanalyse".<br><br>
-        Wenn das nicht deine Schuld war, dann schick mir 'ne Mail, oder schreib' was auf Github, ich
-        freu' mich &uuml;ber Feedback!</p>
+        Wenn das nicht deine Schuld war, dann schreib' was auf <a
+                href="https://github.com/Fynf/randomfood2">GitHub</a>, ich freu' mich &uuml;ber
+        Feedback!</p>
 
     <br>
     <a class="bigLink" href="/">Zur&uuml;ck auf Los</a>
 </div>
+<div class="bottomleft"><a
+        href="https://github.com/Fynf/randomfood2">[Der Code ist auf GitHub!]</a></div>
 
 </body>
 </html>

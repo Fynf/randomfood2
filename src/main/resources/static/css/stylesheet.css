@@ -1,0 +1,46 @@
+* {
+    text-align: center;
+    font-family: 'Source Code Pro', monospace;
+    color: #e1f5fe;
+}
+
+body {
+    background-color: #002f6c;
+}
+
+
+h1 {
+    text-align: center;
+    font-family: 'Source Code Pro', monospace;
+    font-size: 42pt;
+}
+
+h2 {
+    font-size: 22pt;
+    font-weight: 400;
+}
+
+p.left {
+    text-align: left;
+}
+
+a.biglink {
+    font-size: 22pt;
+    color: #e1f5fe;
+    font-weight: 700;
+}
+
+.center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+}
+
+.bottomleft {
+    position: fixed;
+    bottom: 8px;
+    left: 8px;
+}
