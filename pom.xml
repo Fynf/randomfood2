@@ -12,7 +12,7 @@
     </parent>
 
     <groupId>dev.fynf</groupId>
-    <version>0.9.3-Beta</version>
+    <version>0.9.5-Beta</version>
 
     <artifactId>randomfood2</artifactId>
     <name>randomfood2</name>
