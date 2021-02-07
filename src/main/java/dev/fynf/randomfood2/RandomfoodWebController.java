@@ -1,18 +1,23 @@
 package dev.fynf.randomfood2;
 
+import dev.fynf.randomfood2.entities.Appetizer;
+import dev.fynf.randomfood2.entities.AppetizerRepository;
 import dev.fynf.randomfood2.foodservice.RandomFoodService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import java.util.concurrent.ThreadLocalRandom;
+import java.util.Collections;
+import java.util.List;
 
 @Controller
 public class RandomfoodWebController {
 
   @Autowired
   private RandomFoodService randomFoodService;
+  @Autowired
+  private AppetizerRepository appetizerRepository;
 
   /**
    * Holt sich ein (1) Randomfood vom Service und reicht es an Thymeleaf weiter,
@@ -23,15 +28,17 @@ public class RandomfoodWebController {
    */
   @GetMapping("/")
   public String returnRandomFood(Model m) {
-    String[] appetizers = new String[]
-        {"heute gibt es", "wir servieren heute", "die Empfehlung des Hauses ist", "koch' doch mal",
-            "probier' doch mal", "der Chefkoch empfiehlt heute", "in der Kantine gibt's",
-            "wie wär's mit", "die Mensa serviert", "was du da riechst ist"};
 
-    m.addAttribute("appetizer",
-        appetizers[ThreadLocalRandom.current().nextInt(0, appetizers.length - 1)]);
+    m.addAttribute("appetizer", getAppetizer());
     m.addAttribute("randomfood", randomFoodService.getFood());
 
     return "output";
+  }
+
+
+  private String getAppetizer() {
+    List<Appetizer> appetizers = appetizerRepository.findAll();
+    Collections.shuffle(appetizers);
+    return appetizers.get(0).getAppetizerName();
   }
 }
