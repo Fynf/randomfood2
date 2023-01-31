@@ -6,11 +6,20 @@ plugins {
     id 'org.jetbrains.kotlin.jvm' version '1.8.0'
     id 'org.jetbrains.kotlin.plugin.spring' version '1.8.0'
     id 'org.jetbrains.kotlin.plugin.jpa' version '1.8.0'
+    id "org.sonarqube" version "3.5.0.2730"
 }
 
 group = 'dev.fynf'
-version = '0.0.1-SNAPSHOT'
+version = '0.9.6'
 sourceCompatibility = '17'
+
+sonarqube {
+    properties {
+        property "sonar.projectKey", "Fynf_randomfood2"
+        property "sonar.organization", "fynf"
+        property "sonar.host.url", "https://sonarcloud.io"
+    }
+}
 
 repositories {
     mavenCentral()
