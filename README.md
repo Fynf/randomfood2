@@ -12,4 +12,6 @@ Vor vielen Jahren gab es so etwas schon einmal, von @Mezgrman programmiert (Desh
 Auf https://randomfood.fynf.dev kann man sich von der Funktion des Ganzen überzeugen, die API gibt es ganz unkompliziert unter https://randomfood.fynf.dev/1 mit einem GET-Request. Denk aber bitte daran, dass in den Textbausteinen auch so Dinge enthalten sind, die an manchem Arbeitsplatz oder Uni-Rechner nicht gerne gesehen werden.
 
 ## Viel Spaß
-Das Projekt ist definiv als Witz gemeint, ich hoffe also, dass du genauso viel Spaß mit dem Ding hast wie ich. Du kannst die API sehr gerne in deinen eigenen Projekten verwursten oder auch für Testdaten verwenden. Wenn du magst schreib mir ne Nachricht mit deinem Projekt, ich freue mich zu sehen was andere damit so machen.
+Das Projekt ist definiv als Witz gemeint, ich hoffe also, dass du genauso viel Spaß mit dem Ding hast wie ich. Du kannst
+die API sehr gerne in deinen eigenen Projekten verwursten oder auch für Testdaten verwenden. Wenn du magst, schreib mir
+ne Nachricht mit deinem Projekt, ich freue mich zu sehen, was andere damit so machen.
