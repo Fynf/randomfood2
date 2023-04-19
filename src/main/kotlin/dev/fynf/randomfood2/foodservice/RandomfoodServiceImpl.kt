@@ -84,7 +84,7 @@ class RandomfoodServiceImpl
         val food = foodList!![getRandomIndex(foodList.size)]
 
         // Die DB-ID des ausgewählten Foods wird in die Sperr-Liste übernommen
-        forbiddenFoodIndices.add(food!!.id!!)
+        forbiddenFoodIndices.add(food!!.id)
         return food.foodName
     }
 
@@ -97,7 +97,7 @@ class RandomfoodServiceImpl
         val modifier = modifierList?.get(getRandomIndex(modifierList.size))
 
         // Die DB-ID des Modifiers, den wir ausgesucht haben, wird in die Sperrliste übernommen
-        forbiddenModifierIndices.add(modifier!!.id!!)
+        forbiddenModifierIndices.add(modifier!!.id)
         return modifier.modifierName
     }
 
@@ -111,7 +111,7 @@ class RandomfoodServiceImpl
         )]
 
         // DB-ID wird gesperrt
-        forbiddenConnectorIndices.add(connector!!.id!!)
+        forbiddenConnectorIndices.add(connector!!.id)
         return connector.connectorName
     }
 
