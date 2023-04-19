@@ -4,10 +4,7 @@ import jakarta.persistence.*
 
 @Entity
 class Connector(
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    val id: Long? = null,
+    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE) val id: Long,
 
-    @Column(unique = true, nullable = false)
-    val connectorName: String
+    @Column(unique = true, nullable = false) val connectorName: String
 )
